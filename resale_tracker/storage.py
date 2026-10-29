@@ -19,9 +19,20 @@ class Storage:
     def load(self) -> list[Listing]:
         if not os.path.exists(self.path):
             return []
-        with open(self.path, "r", encoding="utf-8") as fh:
-            raw = json.load(fh)
-        return [Listing.from_dict(item) for item in raw]
+        try:
+            with open(self.path, "r", encoding="utf-8") as fh:
+                raw = json.load(fh)
+        except (json.JSONDecodeError, OSError):
+            return []
+        if not isinstance(raw, list):
+            return []
+        listings: list[Listing] = []
+        for item in raw:
+            try:
+                listings.append(Listing.from_dict(item))
+            except TypeError:
+                continue
+        return listings
 
     def save(self, listings: Iterable[Listing]) -> None:
         data = [listing.to_dict() for listing in listings]

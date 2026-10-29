@@ -1,7 +1,13 @@
-__pycache__/
-*.py[cod]
 *.egg-info/
-dist/
-build/
+*.py[cod]
+*.pyc
 .eggs/
+.env
+.env.*
+.venv/
+__pycache__/
+build/
+dist/
+dist/*.tmp
 listings.json
+node_modules/

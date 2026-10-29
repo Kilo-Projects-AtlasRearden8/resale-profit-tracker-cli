@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
-from datetime import date, datetime
-from typing import Optional
+from datetime import date
 
 
 @dataclass
